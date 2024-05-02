@@ -28,7 +28,7 @@ class StaffDetails extends StatelessWidget {
                 ))
           ],
           title: Text(
-            'Detaile view',
+            'Detail view',
             style: TextStyle(fontWeight: FontWeight.bold),
           )),
       body: Padding(
