@@ -7,6 +7,7 @@ import 'package:work_force/db/functions/work_functions/work_function.dart';
 import 'package:work_force/db/model/addwork_model.dart';
 import 'package:work_force/globalfuntion/textformfield.dart';
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class WorkEditScreen extends StatefulWidget {
   
@@ -59,7 +60,9 @@ class _WorkEditScreenState extends State<WorkEditScreen> {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,

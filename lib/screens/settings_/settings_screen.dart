@@ -43,37 +43,7 @@ class _SetingsScreenState extends State<SetingsScreen> {
               trailing: Icon(Icons.chevron_right_sharp),
             ),
             Divider(),
-          //   Row(
-          //     children: [
-          //       ElevatedButton(
-          //           onPressed: () {},
-          //           child: Row(
-          //             children: [
-          //               Icon(
-          //                 Icons.privacy_tip,
-          //                 size: 18,
-          //               ),
-          //               Text(
-          //                 'Privacy Policy',
-          //                 style: TextStyle(fontSize: 10),
-          //               )
-          //             ],
-          //           )),ElevatedButton(
-          //           onPressed: () {},
-          //           child: Row(
-          //             children: [
-          //               Icon(
-          //                 Icons.
-          //                 size: 18,
-          //               ),
-          //               Text(
-          //                 'Privacy Policy',
-          //                 style: TextStyle(fontSize: 10),
-          //               )
-          //             ],
-          //           ))
-          //     ],
-          //   )
+          
            ],
         ),
       ),

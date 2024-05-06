@@ -6,6 +6,7 @@ import 'package:work_force/db/functions/service/service.dart';
 import 'package:work_force/db/model/data_model.dart';
 import 'package:work_force/globalfuntion/textformfield.dart';
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class EditStaff extends StatefulWidget {
 StaffModel editstaf;
@@ -59,7 +60,9 @@ class _EditStaffState extends State<EditStaff> {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work_force/db/functions/db_functions.dart';
 import 'package:work_force/db/functions/work_functions/work_function.dart';
 import 'package:work_force/globalfuntion/variables.dart';
 import 'package:work_force/screens/settings_/settings_screen.dart';
@@ -37,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: false,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,
@@ -820,11 +823,13 @@ void initialiseVariable() async {
     completed = await getALlWork();
     pending = await getALlWork(false);
     estimatedRevenue = await getEstimatedRevenue();
+    totalstaff = await getCompletedStaffCount();
     setState(() {
       revenue;
       completed;
       pending;
       estimatedRevenue;
+      
     });
   }
 

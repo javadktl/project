@@ -54,10 +54,10 @@ Future<List<String>> getAllNameAsync() async {
 
 Future<int> getCompletedStaffCount() async {
   final staffDB = await Hive.openBox<StaffModel>('staff_db');
-  int totalstaf = 0;
+  int totalstaf = staffDB.values.length;
   
-  for (StaffModel i in staffDB.values) {
-    if (i.name.isEmpty) totalstaf++;
-  }
+  // for (StaffModel i in staffDB.values) {
+  //   if (i.name.isEmpty) totalstaf++;
+  // }
   return totalstaf;
 }

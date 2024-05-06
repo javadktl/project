@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class ImageView extends StatelessWidget {
   String? ImagePath;
@@ -19,7 +20,9 @@ class ImageView extends StatelessWidget {
             centerTitle: true,
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
                   icon: Icon(
                     Icons.settings,
                     color: Colors.white,

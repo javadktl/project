@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:work_force/db/model/data_model.dart';
 import 'package:work_force/globalfuntion/variables.dart';
 import 'package:work_force/screens/detail_view_page/image_view.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class StaffDetails extends StatelessWidget {
   StaffModel staffdetail;
@@ -21,7 +22,9 @@ class StaffDetails extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:work_force/db/functions/work_functions/work_function.dart';
 import 'package:work_force/db/model/addwork_model.dart';
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/Work_screen/work_detaile_view.dart';
 import 'package:work_force/screens/home_screen/home_screen.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class RevenuePage extends StatefulWidget {
   const RevenuePage({super.key});
@@ -31,7 +33,11 @@ class _RevenuePageState extends State<RevenuePage> {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SetingsScreen()),
+                  );
+                },
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,
@@ -53,11 +59,12 @@ class _RevenuePageState extends State<RevenuePage> {
                     : 'Select start date'),
               ),
               IconButton(
-                      onPressed: () {
-                        selectDateTimeRange();
-                       
-                      },
-                      icon: Icon(Icons.calendar_month),iconSize: 30,),
+                onPressed: () {
+                  selectDateTimeRange();
+                },
+                icon: Icon(Icons.calendar_month),
+                iconSize: 30,
+              ),
               ListTile(
                 title: Text('To date'),
                 subtitle: Text(toDate != null
@@ -108,69 +115,76 @@ class _RevenuePageState extends State<RevenuePage> {
                                   fromDate!.day) &&
                           (int.parse(element.date.split('-').toList()[0]) <=
                                   toDate!.year &&
-                              int.parse(element.date.split('-').toList()[1])  <=
+                              int.parse(element.date.split('-').toList()[1]) <=
                                   toDate!.month &&
-                              int.parse(element.date.split('-').toList()[2])  <=
+                              int.parse(element.date.split('-').toList()[2]) <=
                                   toDate!.day);
                     }
                     return element.paidstatus;
                   }).toList();
 
                   return RefreshIndicator(
-                    onRefresh: ()async{
-                        await Future.delayed(const Duration(seconds:2));
-                        getALlWork();
-                        setState(() {
-                           fromDate=null;
-                           toDate=null;
-                        });
-                       
+                    onRefresh: () async {
+                      await Future.delayed(const Duration(seconds: 2));
+                      getALlWork();
+                      setState(() {
+                        fromDate = null;
+                        toDate = null;
+                      });
                     },
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         WorkModel workdata = data[index];
                         return Padding(
                           padding: const EdgeInsets.all(6.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: tileColor,
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 4,
-                                  blurRadius: .2,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      workdata.name,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      workdata.date,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  '₹${int.parse(workdata.day) * int.parse(workdata.amount)}',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14),
-                                ),
-                              ],
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => WorkDetaileView(
+                                        workdetails: data[index]))),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: tileColor,
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 4,
+                                    blurRadius: .2,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        workdata.name,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        workdata.date,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    '₹${int.parse(workdata.day) * int.parse(workdata.amount)}',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

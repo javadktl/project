@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:work_force/db/functions/work_functions/work_function.dart';
 import 'package:work_force/db/model/addwork_model.dart';
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 class WorkDetaileView extends StatefulWidget {
   WorkModel workdetails;
@@ -27,7 +28,9 @@ class _WorkDetaileViewState extends State<WorkDetaileView> {
         //centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SetingsScreen()),
+              );},
             icon: Icon(
               Icons.settings,
               color: Colors.white,
@@ -35,7 +38,7 @@ class _WorkDetaileViewState extends State<WorkDetaileView> {
           ),
         ],
         title: Text(
-          'Work Detail View',
+          widget.workdetails.worklist,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'CustomFont',
@@ -56,85 +59,87 @@ class _WorkDetaileViewState extends State<WorkDetaileView> {
                   children: [
                     ListTile(
                         title: Text(
+                          widget.workdetails.stafflist,
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ),
+                        trailing: Text(
+                          'Staff Name',
+                          style: TextStyle(color: Colors.white60),
+                        )),
+                    Divider(),
+                    ListTile(
+                        title: Text(
+                          widget.workdetails.name,
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ),
+                        trailing: Text(
+                          'Customer Name',
+                          style: TextStyle(color: Colors.white60),
+                        )),
+                    Divider(),
+                    ListTile(
+                        title: Text(
                           widget.workdetails.location,
-                          style: TextStyle(fontSize: 22,color: Colors.white),
+                          style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
                         trailing: CircleAvatar(
-                          child: Icon(Icons.location_on_outlined),
+                          child: Icon(Icons.location_on_outlined,
+                              color: const Color.fromARGB(255, 5, 51, 89)),
                           backgroundColor: Color.fromARGB(160, 158, 158, 158),
                         )),
-
                     Divider(),
                     ListTile(
                       title: Text(widget.workdetails.apartment,
-                          style: TextStyle(fontSize: 20,color:Colors.white)),
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                       trailing: CircleAvatar(
-                        child: Icon(Icons.apartment),
+                        child: Icon(Icons.apartment,
+                            color: const Color.fromARGB(255, 5, 51, 89)),
                         backgroundColor: Color.fromARGB(160, 158, 158, 158),
                       ),
                     ),
-
                     Divider(),
                     ListTile(
                       title: Text(widget.workdetails.date,
-                          style: TextStyle(fontSize: 20,color: Colors.white)),
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                       trailing: CircleAvatar(
-                        child: Icon(Icons.calendar_month_outlined),
+                        child: Icon(Icons.calendar_month_outlined,
+                            color: const Color.fromARGB(255, 5, 51, 89)),
                         backgroundColor: Color.fromARGB(160, 158, 158, 158),
                       ),
                     ),
-
-
                     Divider(),
                     ListTile(
-                      title: Text(widget.workdetails.phonenumber,
-                          style: TextStyle(fontSize: 20,color: Colors.white)),
+                      title: Text("+91 ${widget.workdetails.phonenumber}",
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                       trailing: CircleAvatar(
                         child: IconButton(
                             onPressed: () {
                               _makePhoneCall(widget.workdetails.phonenumber);
                             },
-                            icon: Icon(Icons.local_phone_rounded)),
+                            icon: Icon(
+                              Icons.local_phone_rounded,
+                              color: Color.fromARGB(255, 5, 51, 89),
+                            )),
                         backgroundColor: Color.fromARGB(160, 158, 158, 158),
                       ),
                     ),
                     Divider(),
-
                     ListTile(
                       title: Text(
-                          '${int.parse(widget.workdetails.day) * int.parse(widget.workdetails.amount)}',
-                          style: TextStyle(fontSize: 20)),
+                          '₹${int.parse(widget.workdetails.day) * int.parse(widget.workdetails.amount)}',
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                       trailing: CircleAvatar(
-                        child: Icon(Icons.currency_rupee_sharp),
+                        child: Icon(
+                          Icons.currency_rupee_sharp,
+                          color: const Color.fromARGB(255, 5, 51, 89),
+                        ),
                         backgroundColor: Color.fromARGB(160, 158, 158, 158),
                       ),
                     ),
-
-                    // Text(
-                    //   widget.workdetails.worklist, // Heading for the column
-                    //   style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                    //     fontWeight: FontWeight.bold,
-                    //     fontSize: 20,
-                    //   ),
-                    // ),
-                    // _buildDetailRow(
-                    //     'Staff Name           :   ',widget.workdetails.stafflist),
-                    // _buildDetailRow(
-                    //     'Customer Name   :   ', widget.workdetails.name),
-                    // _buildDetailRow('Location                :   ',
-                    //     widget.workdetails.location),
-                    // _buildDetailRow('Apartment             :   ',
-                    //     widget.workdetails.apartment),
-                    // _buildDetailRow('Total Amount        :  ',
-                    //     '${int.parse(widget.workdetails.day) * int.parse(widget.workdetails.amount)}'),
-                    // GestureDetector(onTap: () => _makePhoneCall(widget.workdetails.phonenumber),
-                    //   child: _buildDetailRow(
-                    //       'Phone Number     :   ', widget.workdetails.phonenumber),
-                    // ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
-
+                    Divider(),
+                    SizedBox(
+                      height: smallestHeight * 0.2,
+                    ),
                     ExpansionTile(
                       textColor: Colors.white,
                       collapsedBackgroundColor: Color.fromARGB(22, 82, 57, 57),
@@ -148,8 +153,8 @@ class _WorkDetaileViewState extends State<WorkDetaileView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.workdetails.date,
-                          style: TextStyle(color: Colors.white70),
+                          '',
+                          style: TextStyle(color: tileColor),
                         ),
                         SizedBox(
                           height: 30,
