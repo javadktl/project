@@ -17,7 +17,6 @@ class _RevenuePageState extends State<RevenuePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getAllWork();
   }

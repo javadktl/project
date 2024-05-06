@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_force/db/functions/work_functions/work_function.dart';
 import 'package:work_force/globalfuntion/variables.dart';
+import 'package:work_force/screens/settings_/settings_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         padding: EdgeInsets.all(10),
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           children: [
                             SizedBox(
-                              width:smallestHeight * 0.5,
+                              width:smallestHeight * 0.4,
                               height: smallestHeight * 0.5,
                               child: Image.asset(
                                 'assets/image/totalRevenue.png',
@@ -99,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(width: 24,),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: smallestWidth * 4.3,
@@ -118,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           children: [
                             SizedBox(
-                              width: smallestHeight * 0.5,
+                              width: smallestHeight * 0.4,
                               height: smallestHeight * 0.5,
                               child: Image.asset(
                                 'assets/image/monthlyRevenue.png',
@@ -128,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: smallestHeight *0.1,
                             ),
                             Text(
-                              'Estimated Revenue',
+                              'Estimated Profit',
                               style: TextStyle(fontWeight: FontWeight.w500),
                             ),
                             Text(
@@ -294,10 +296,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    highlightColor: Colors.blue,
-                    splashColor: Colors.blueAccent,
+                  GestureDetector(
+                    onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SetingsScreen()));},
                     child: Container(
                       padding: EdgeInsets.all(10),
                       width: smallestWidth * 4.3,
