@@ -306,7 +306,7 @@ class _AddStaffState extends State<AddStaff> {
             ChoiceChip(
               label: const Text('Male'),
               selected: _selectedGender == 'Male',
-              onSelected: (value) => setState(() => _selectedGender = 'male'),
+              onSelected: (value) => setState(() => _selectedGender = 'Male'),
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               selectedColor: primaryGray,
               checkmarkColor: Colors.white,
