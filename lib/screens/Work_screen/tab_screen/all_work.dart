@@ -113,11 +113,14 @@ class _WorkScreenPageState extends State<WorkScreenPage> {
   }
 
   Widget _buildWorkListView(List<WorkModel> filteredWorkList) {
+
     if (filteredWorkList.isEmpty) {
       return Center(
-        child: Text('No data available for the given search query'),
+        child: Text('No data available'),
       );
     }
+
+
     filteredWorkList.sort((a, b) {
       DateTime dateA = DateTime.parse(a.date);
       DateTime dateB = DateTime.parse(b.date);

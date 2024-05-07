@@ -124,40 +124,42 @@ class _StaffscreenState extends State<Staffscreen> {
 
 // ==============================================================================================================================
 
-  Widget buildStaffList(BuildContext context) {
-    
-    return Expanded(
-      child: ValueListenableBuilder(
-        key: ValueKey(finduser),
-        valueListenable: staffListNotifier,
-        builder: (BuildContext ctx, List<StaffModel> staffList, Widget? child) {
-          List<StaffModel> filteredStaffList = staffList.where((staff) {
-            String name = staff.name.toLowerCase();
-            return name.contains(keyword2);
-          }).toList();
+Widget buildStaffList(BuildContext context) {
+  return Expanded(
+    child: ValueListenableBuilder(
+      key: ValueKey(finduser),
+      valueListenable: staffListNotifier,
+      builder: (BuildContext ctx, List<StaffModel> staffList, Widget? child) {
+        if (staffList.isEmpty) {
+          return Center(
+            child: Text('No data available'),
+          );
+        }
 
-          // Sorting logic based on name
-          filteredStaffList.sort((a, b) {
-            int comparison = sortByDateAscending
-                ? a.name.compareTo(b.name)
-                : b.name.compareTo(a.name);
-            return comparison;
-          });
-          if (filteredStaffList.isEmpty) {
-            return Center(
-              child: Text('No data available for the given search query'),
-            );
-          }
-          if (staffList.isEmpty) {
-            return Center(
-              child: Text('No data available'),
-            );
-          }
-          return buildStaffListView(filteredStaffList, context);
-        },
-      ),
-    );
-  }
+        List<StaffModel> filteredStaffList = staffList.where((staff) {
+          String name = staff.name.toLowerCase();
+          return name.contains(keyword2);
+        }).toList();
+
+        // Sorting logic based on name
+        filteredStaffList.sort((a, b) {
+          int comparison = sortByDateAscending
+              ? a.name.compareTo(b.name)
+              : b.name.compareTo(a.name);
+          return comparison;
+        });
+
+        if (filteredStaffList.isEmpty) {
+          return Center(
+            child: Text('No data available for the given search query'),
+          );
+        }
+
+        return buildStaffListView(filteredStaffList, context);
+      },
+    ),
+  );
+}
 
   Widget buildStaffListView(
       List<StaffModel> filteredStaffList, BuildContext context) {
