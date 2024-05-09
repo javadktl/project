@@ -58,7 +58,7 @@ class _WorkScreenPageState extends State<WorkScreenPage> {
                       setState(() {
                         sortByDateAscending = choice == 'Sort by Date ⬆';
                         
-                      });
+                      }); 
                     },
                   ),
                 ],

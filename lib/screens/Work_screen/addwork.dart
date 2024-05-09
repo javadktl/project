@@ -34,7 +34,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
     // 'item3',
   ];
 
-  List  work = [
+  List work = [
     'Electric',
     'Plumbing',
     'Cleanig',
@@ -44,7 +44,8 @@ class _AddworkScreenState extends State<AddworkScreen> {
   void initState() {
     initList();
     super.initState();
-    work=[...work,...workNotifier.value];
+    work = [...work, ...workNotifier.value];
+    initialvalue();
   }
 
   @override
@@ -58,9 +59,11 @@ class _AddworkScreenState extends State<AddworkScreen> {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => SetingsScreen()),
-              );},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SetingsScreen()),
+                  );
+                },
                 icon: Icon(
                   Icons.settings,
                   color: Colors.white,
@@ -85,16 +88,12 @@ class _AddworkScreenState extends State<AddworkScreen> {
                     onChanged: (newValue) =>
                         setState(() => _selectedwork = newValue!),
                     items: work
-                        .map<DropdownMenuItem>(
-                            (value) => DropdownMenuItem(
-                                  value: value,
-                                  child: Text(
-                                    ('$value')
-                                  ),
-                                ))
+                        .map<DropdownMenuItem>((value) => DropdownMenuItem(
+                              value: value,
+                              child: Text(('$value')),
+                            ))
                         .toList(),
                   ),
-                  
                 ),
                 Text('Select Staff'),
                 Container(
@@ -136,9 +135,8 @@ class _AddworkScreenState extends State<AddworkScreen> {
                     },
                   ),
                 ),
-                
                 SizedBox(
-                  height:smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Input(
                   label: 'Customer Name',
@@ -151,7 +149,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
                   },
                 ),
                 SizedBox(
-                  height:smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Input(
                   label: 'Location',
@@ -164,7 +162,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
                   },
                 ),
                 SizedBox(
-                  height: smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Input(
                   label: 'Villa/Apartment',
@@ -177,9 +175,8 @@ class _AddworkScreenState extends State<AddworkScreen> {
                   },
                 ),
                 SizedBox(
-                  height:smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
-                
                 Input(
                   label: 'Phonenumber',
                   controller: _phonenumbercontroller,
@@ -194,7 +191,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
                   },
                 ),
                 SizedBox(
-                  height: smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Input(
                   label: 'Date',
@@ -213,7 +210,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
                   },
                 ),
                 SizedBox(
-                  height: smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -223,7 +220,7 @@ class _AddworkScreenState extends State<AddworkScreen> {
                         Text('Amount/day'),
                         SizedBox(
                             width: screenWidth * 0.3,
-                            height: smallestHeight * 0.5 ,
+                            height: smallestHeight * 0.5,
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               controller: _amountcontroller,
@@ -245,27 +242,34 @@ class _AddworkScreenState extends State<AddworkScreen> {
                         Text('Total days'),
                         SizedBox(
                             width: screenWidth * 0.3,
-                            height: smallestHeight * 0.5 ,
-                            child: TextFormField(keyboardType: TextInputType.number,
+                            height: smallestHeight * 0.5,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
                               controller: _daycontroller,
                               cursorHeight: 15,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(7))),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return;
+                                }
+                                return null;
+                              },
                             ))
                       ],
                     )
                   ],
                 ),
                 SizedBox(
-                  height: smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 Input(label: 'Remarks', controller: _remarkscontroller),
                 SizedBox(
-                  height: smallestHeight * 0.2 ,
+                  height: smallestHeight * 0.2,
                 ),
                 SizedBox(
-                  width: screenWidth * 0.7 ,
+                  width: screenWidth * 0.7,
                   child: ElevatedButton(
                     onPressed: () {
                       onAddWorkButtonClicked(context);
@@ -343,14 +347,24 @@ class _AddworkScreenState extends State<AddworkScreen> {
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
       ));
-    }else{{ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text('Please Fill Entire Field'),
-          duration: Duration(seconds: 2),
-          margin: EdgeInsets.all(10),
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.redAccent,
-        ),
-      );}}
+    } else {
+      {
+        ScaffoldMessenger.of(mtx).showSnackBar(
+          const SnackBar(
+            content: Text('Please Fill Entire Field'),
+            duration: Duration(seconds: 2),
+            margin: EdgeInsets.all(10),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
+  }
+
+  void initialvalue() {
+    _amountcontroller.text = '0';
+
+    _daycontroller.text = '0';
   }
 }

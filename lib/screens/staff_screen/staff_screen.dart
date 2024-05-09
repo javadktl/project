@@ -255,7 +255,7 @@ Widget buildStaffList(BuildContext context) {
           actions: [
             TextButton(
               onPressed: () {
-                
+                 deliteStaff( data.idDB!);
                 Navigator.pop(context);
               },
               child: const Text('Yes'),

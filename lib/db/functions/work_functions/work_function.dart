@@ -10,7 +10,7 @@ ValueNotifier<List<WorkModel>> worklistNotifier = ValueNotifier([]);
 Future<void> addwork(WorkModel value) async {
   final workDB = await Hive.openBox<WorkModel>('work_db');
   value.id = await workDB.add(value);
-  // workDB.put(value.id, value);
+  workDB.put(value.id, value);
   log(value.id.toString());
   worklistNotifier.value.add(value);
   worklistNotifier.notifyListeners();
