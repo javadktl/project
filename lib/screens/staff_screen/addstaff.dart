@@ -23,7 +23,7 @@ class _AddStaffState extends State<AddStaff> {
   final _formkey = GlobalKey<FormState>();
   String _selectedWork = 'Cleaner';
   List workcatogory = [
-    'Electrician',
+    'Electriciian',
     'Plumber',
     'Cleaner',
   ];
